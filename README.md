@@ -10,16 +10,16 @@ Run the following command below to create a docker container with RabbitMq
 
 When create the container you can access in your browser the URL <code>http://localhost:15672</code>. This page is the administration platform that RabbitMq offer to us. There we can watch all the queues created and their proccess
 
->Note: The port 5672 and 15672 is the default ports of RabbitMq.
+> Note: The port 5672 and 15672 is the default ports of RabbitMq.
 
 RabbitMq offer to us a default user which is:
 
->username: guest<br/>
->password: guest
+> username: guest<br/>
+> password: guest
 
 <hr/>
 
-><h2>Sentry configuration</h2>
+> <h2>Sentry configuration</h2>
 
 In this project we use Sentry to monitor our application. So, before installing the microservice, we have to create a project on the Sentry platform and get the app-key and the project ID.
 
@@ -33,7 +33,7 @@ After create a project, you can get the app-key and project ID from the URL that
 
 <hr/>
 
-><h2>Microservice Installation</h2>
+> <h2>Microservice Installation</h2>
 
 Run the following command below to clone the project.
 
@@ -46,27 +46,35 @@ Run <code>npm install</code> or <code>yarn install</code> to install the depende
 Create the .env file copying the .env.example. The .env contains the following parameters:
 
 This represent the name of our queue on RabbitMq. You literally you can put anything here, but seems more logic if you put a name that represents the bussiness logic, in this case: "notifications" for example.
+
 > QUEUE_NAME_NOTIFICATIONS=
 
 Here we have the host of the RabbitMq container. In production for example we put a IP for the server. But in this case we can put: "localhost"
+
 > QUEUE_HOSTNAME=
 
 The port of the comunication. In this case is 5672 (Default port)
+
 > QUEUE_PORT=
 
 RabbitMq accept two types of protocol <code>amqp</code> and <code>amqps</code>. The<code>amqps</code> is for TLS/SSL encrypted and only works on port 5671, so in this case we use "amqp"
+
 > QUEUE_PROTOCOL=
 
 Here we put the default user of RabbitMq: "guest". In production the "guest" user has to be deleted for security, but before you delete make sure to create another user in the administration platform (<code>http://localhost:15672</code>). For create another user you can check the URL: <code>https://www.ge.com/digital/documentation/proficy-plant-applications/version81/t_gsg_configuring_user_in_RabbitMQ.html</code>
+
 > QUEUE_USERNAME=
 
 Put the default password "guest" or your another password if you create a user and delete the "guest"
+
 > QUEUE_PASSWORD=
 
 Put the app-key that we get from the Sentry after we create a project
+
 > SENTRY_KEY=
 
 Put the project ID that we get from the Sentry after we create a project
+
 > SENTRY_PROJECT=
 
 <hr/>
@@ -77,4 +85,4 @@ After follow this steps you can run the command <code>yarn dev</code> or <code>n
 
 In your POSTMAN or other application you can put the POST URL <code>http://localhost:3333/notifications</code> and send a request. You will receive a 202 status from the request which means that our mocked data went to uor queue and waiting for a consumer to get what we send.
 
-If you access the administration platform of RabbitMq you will se on the dashboard on item called "Ready", which means the total of messages that will be read after we install the consumer microservice to read our queue.
+If you access the administration platform of RabbitMq and click on the tab "Queues" you will our queue created and a column with a item called "Ready", which means the total of messages that will be read after we install the consumer microservice to read our queue.
