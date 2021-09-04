@@ -1,5 +1,4 @@
 interface IQueueConnectionProps {
-  queueEmails: string;
   queueNotifications: string;
   hostname: string;
   protocol: string;
@@ -9,7 +8,6 @@ interface IQueueConnectionProps {
 }
 
 export default {
-  queueEmails: process.env.QUEUE_NAME_EMAILS,
   queueNotifications: process.env.QUEUE_NAME_NOTIFICATIONS,
   hostname: process.env.QUEUE_HOSTNAME,
   port: Number(process.env.QUEUE_PORT),
